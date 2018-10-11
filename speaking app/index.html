@@ -1,0 +1,83 @@
+<html>
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/addons/p5.dom.js"></script>
+	<script src="p5.speech.js"></script>
+	<script>
+
+	var myVoice = new p5.Speech('Google UK English Female'); // new P5.Speech object
+
+
+  myVoice.onLoad = speechLoaded;
+	myVoice.onStart = speechStarted;
+	//myVoice.onPause = speechPaused; // not working
+	//myVoice.onResume = speechResumed; // not working
+	myVoice.onEnd = speechEnded;
+
+
+
+//var intro = "Hello and welcome to Computing 1. Please excuse my unusal voice! I lost my voice this morning, so I wrote this script to speak for me. It is lovely to meet all of you. I have enjoyed getting to know your children over the past few weeks.";
+
+//var intro =  "On your table, you will find a brief description of the structure and the goals of the course. Could I ask a volunteer to read the paragraph on the paper?";
+
+//var intro = "In our first project, the students use code to design patterns for textiles. They have been researching patterns in history, nature and their daily lives, for inspiration.";
+
+//var intro = "To program the patterns, we are using a platform called p5.js, a library for Javascript. I'll show a brief video about what we can do in p5. I also made this presentation in p5!";
+
+ var intro = "After textile design, we will explore the history of computing, and ponder ethical questions surrounding computing in the modern world. Students will conduct research and present their findings via an interactive learning tool called an Explorable Explanation.";
+
+
+	function setup()
+	{
+		createCanvas(400, 400);
+
+		// button 1:
+		introbutton = createButton('Speak');
+  		introbutton.position(180, 100);
+  		introbutton.mousePressed(buttonClicked);
+
+
+	}
+
+	function draw()
+	{
+		// why draw when you can click?
+	}
+
+	function buttonClicked()
+	{
+		if(introbutton.elt.innerHTML=='Speak') myVoice.speak(intro);
+
+		else if(introbutton.elt.innerHTML=='Stop') myVoice.stop();
+	}
+
+
+
+	function speechLoaded()
+	{
+  		// say cheers:
+		myVoice.speak("shall we proceed?");
+	}
+
+	function speechStarted()
+	{
+		background(0, 255, 0);
+		introbutton.elt.innerHTML = 'Stop';
+	}
+
+
+
+
+
+	function speechEnded()
+	{
+		background(255, 0, 0);
+		introbutton.elt.innerHTML = 'Speak';
+	}
+
+
+</script>
+</head>
+<body>
+</body>
+</html>
